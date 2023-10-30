@@ -42,7 +42,8 @@ onMounted(async () => {
   setTimeout(() => {
     store.delayLoading = false;
   });
-  const request = await fetchData();
+
+  var request = await fetchData();
 
   store.$patch({
     status: "success",

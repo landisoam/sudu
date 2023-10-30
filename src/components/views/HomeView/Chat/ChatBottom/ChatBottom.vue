@@ -3,6 +3,7 @@ import type { Ref } from "vue";
 import type { IConversation } from "@src/types";
 
 import useStore from "@src/store/store";
+import defaults from "@src/store/defaults";
 import { ref, inject, onMounted } from "vue";
 import { getConversationIndex } from "@src/utils";
 
@@ -79,35 +80,85 @@ const handleMessage = (msg: String) => {
 
 const submitmessage = async () =>{
   // var httpurl = 'http://aserious.tplinkdns.com:8085/chat?text=' + value.value ;
-  const response = await axios.post(
-    'http://aserious.tplinkdns.com:8085/chat',
-    '',
-    {
-      params: {
-        'text': value.value
-      },
-      headers: {
-        // 'accept': 'application/json',
-        'Access-Control-Allow-Origin' : '*',
-        // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      }
-    }
-  );
-  console.log(response.data);
-
-  // axios.post(httpurl, {
-  //   headers: {
-  //     'Access-Control-Allow-Origin': '*',
-  //     'Content-Type': 'application/json',
-  //     'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS'
-  //   },
-  // })
-  // .then(function (response) {
-  //   console.log(response);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
+  console.log(defaults);
+  console.log(defaults.conversations[0].messages);
+  const message = defaults.conversations[0].messages;
+  const dataget = {
+        id: 3,
+        content: value.value,
+        date: "5:00PM",
+        state: "read",
+        sender: {
+          id: 2,
+          firstName: "Aserious",
+          lastName: "Member",
+          lastSeen: new Date(),
+          email: "admin@aserious.com",
+          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+        }
+      };
+      message.push(dataget);
+  // const response = await axios.post(
+  //   'http://aserious.tplinkdns.com:8085/chat',
+  //   '',
+  //   {
+  //     params: {
+  //       'text': value.value
+  //     },
+  //     headers: {
+  //       'accept': 'application/json',
+  //       // 'Access-Control-Allow-Origin' : '*',
+  //       // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+  //     }
+  //   }
+  // );
+  // console.log(response.data);
+  //   if(response.status == 200){
+  //       const data = await axios.post(
+  //         'http://aserious.tplinkdns.com:8000/rest/v1/Chat',
+  //         // '{ "some_column": "someValue", "other_column": "otherValue" }',
+  //         {
+  //           'content': value.value,
+  //           'sender_firstname': 'Aserious',
+  //           'sender_lastname': 'Member',
+  //           'sender_id': '2',
+  //           'sender_email': 'Aserious@admin.co',
+  //           'avatar': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+  //           'state': 'read'
+  //         },
+  //         {
+  //           headers: {
+  //             'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q',
+  //             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q',
+  //             'Content-Type': 'application/json',
+  //             'Prefer': 'return=minimal'
+  //           }
+  //         }
+  //       );
+  //     console.log(data);
+  //     const data1 = await axios.post(
+  //       'http://aserious.tplinkdns.com:8000/rest/v1/Chat',
+  //       // '{ "some_column": "someValue", "other_column": "otherValue" }',
+  //       {
+  //         'content': response.data,
+  //         'sender_firstname': 'Aserious',
+  //         'sender_lastname': 'CEO',
+  //         'sender_id': '1',
+  //         'sender_email': 'Aserious@admin.co',
+  //         'avatar': 'https://lh5.googleusercontent.com/p/AF1QipPBgPobGflvgKsiiW9GnU4Lu-VEjesy2EKYriFu=w218-h218-n-k-no',
+  //         'state': 'read'
+  //       },
+  //       {
+  //         headers: {
+  //           'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q',
+  //           'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJzZXJ2aWNlX3JvbGUiLAogICAgImlzcyI6ICJzdXBhYmFzZS1kZW1vIiwKICAgICJpYXQiOiAxNjQxNzY5MjAwLAogICAgImV4cCI6IDE3OTk1MzU2MDAKfQ.DaYlNEoUrrEn2Ig7tqibS-PHK5vgusbcbo7X36XVt4Q',
+  //           'Content-Type': 'application/json',
+  //           'Prefer': 'return=minimal'
+  //         }
+  //       }
+  //     );
+  //     console.log(data1);
+  //   }
 };
 
 onMounted(() => {

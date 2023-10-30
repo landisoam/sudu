@@ -18,7 +18,8 @@ const store = useStore();
 
 const container: Ref<HTMLElement | null> = ref(null);
 
-const activeConversation = <IConversation>inject("activeConversation");
+var activeConversation = <IConversation>inject("activeConversation");
+
 
 // checks whether the previous message was sent by the same user.
 const isFollowUp = (index: number, previousIndex: number): boolean => {

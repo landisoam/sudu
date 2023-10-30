@@ -27,7 +27,7 @@ axios
       }
       msgs.push(dataget);
     };
-    
+
   })
   .catch((error) => {
     console.error(error);
